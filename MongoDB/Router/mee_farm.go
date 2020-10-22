@@ -10,7 +10,8 @@ import (
 )
 
 func Get(c *gin.Context) {
-	data := Controller.ReadDoc("Sensor3")
+	device := c.Params.ByName("device")
+	data := Controller.ReadDoc(device)
 	// c.JSON(http.StatusOK, gin.H{
 	// 	"Data": data,
 	// })
