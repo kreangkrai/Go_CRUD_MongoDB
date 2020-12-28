@@ -16,6 +16,10 @@ func SetupRouter() (*gin.Engine, string) {
 	r.POST("/insert", Insert)
 	r.PUT("/update", Update)
 	r.DELETE("/delete/:device", Delete)
+
+	//Account
+	r.GET("/getname/:name", GetAccount)
+	r.POST("insertaccount", InsertAccount)
 	// port := "8080"
 	// if os.Getenv("ASPNETCORE_PORT") != "" { // get enviroment variable that set by ACNM
 	// 	port = os.Getenv("ASPNETCORE_PORT")
