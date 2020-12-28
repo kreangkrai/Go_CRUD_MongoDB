@@ -13,6 +13,7 @@ func SetupRouter() (*gin.Engine, string) {
 	r := gin.Default()
 	r.Use(Middleware())
 	r.GET("/get/:device", Get)
+	r.GET("/gets", Gets)
 	r.POST("/insert", Insert)
 	r.PUT("/update", Update)
 	r.DELETE("/delete/:device", Delete)

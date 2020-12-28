@@ -35,6 +35,30 @@ func ReadDoc(device string) []Models.DataModel {
 	return datas
 }
 
+func ReadDocAll() []Models.DataModel {
+
+	ctx, cancelFindOne := context.WithTimeout(context.Background(), 10*time.Second)
+
+	// filter := bson.M{"device": device}
+	SingleResult, errFind := collection.Find(context.TODO(), bson.D{})
+	if errFind != nil {
+		panic(errFind)
+	}
+	cancelFindOne()
+
+	datas := []Models.DataModel{}
+	defer SingleResult.Close(ctx)
+	for SingleResult.Next(ctx) {
+		var episode Models.DataModel
+		if err := SingleResult.Decode(&episode); err != nil {
+			log.Fatal(err)
+		}
+		datas = append(datas, episode)
+	}
+
+	return datas
+}
+
 func InsertDoc(data Models.DataModel) (*mongo.InsertOneResult, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()

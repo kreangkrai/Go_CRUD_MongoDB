@@ -18,7 +18,15 @@ func Get(c *gin.Context) {
 
 	c.JSON(200, data)
 }
+func Gets(c *gin.Context) {
+	//device := c.Params.ByName("device")
+	data := Controller.ReadDocAll()
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"Data": data,
+	// })
 
+	c.JSON(200, data)
+}
 func Insert(c *gin.Context) {
 	var input Models.DataModel
 	err := c.ShouldBindJSON(&input)
